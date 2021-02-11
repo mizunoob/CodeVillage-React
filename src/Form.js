@@ -1,9 +1,20 @@
-import React from 'react'
+import React, { useState } from 'react'
 
-const Form = () => {
+
+const Form = ({ addTodo }) => {
+  const [value, setValue] = useState('')
+
+  const handleSubmit = e => {
+    e.preventDefault()
+    if (!value.trim()) return
+    addTodo(value)
+    setValue('')
+  }
   return(
-    <form>
-      <input type="text"></input>
+    <form onSubmit={handleSubmit}>
+      <input value={value} type="text" onChange={e => {
+        setValue(e.target.value)
+      }}></input>
     </form>
   )
 }
